@@ -16,6 +16,5 @@ unused_fields:
   - nameOrig
   - nameDest
   - isFlaggedFraud
-  - isFraud
 test_size: 0.2
 random_state: 42

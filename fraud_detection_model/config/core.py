@@ -40,6 +40,7 @@ class ModelConfig(BaseModel):
     unused_fields: List[str]
     test_size: float
     random_state: int
+    features: List[str]
 
 class Config(BaseModel):
     """Master config object."""

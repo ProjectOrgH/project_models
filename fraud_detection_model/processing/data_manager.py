@@ -44,11 +44,12 @@ def pre_pipeline_preparation(*, data_frame: pd.DataFrame) -> pd.DataFrame:
 
     data_frame['isFraud']=data_frame['isFraud'].apply(f1) 
                   
-    if isinstance(config.model_config, dict):
+    #if isinstance(config.model_config, dict):
         # If config.model_config is a dictionary, create a ModelConfig object
-        model_config = ModelConfig(**config.model_config)
-    else:
-        model_config = config.model_config
+    #    model_config = ModelConfig(**config.model_config)
+    #else:
+    #    model_config = config.model_config
+        
     # drop unnecessary variables
     data_frame.drop(labels=config.model_config.unused_fields, axis=1, inplace=True)
 

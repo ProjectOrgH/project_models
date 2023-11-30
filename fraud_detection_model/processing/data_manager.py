@@ -10,7 +10,11 @@ import pandas as pd
 from sklearn.pipeline import Pipeline
 
 from fraud_detection_model import __version__ as _version
-from fraud_detection_model.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config
+from fraud_detection_model.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config, ModelConfig
+
+import os
+from urllib.request import urlretrieve
+import gdown
 
 
 ##  Pre-Pipeline Preparation
@@ -38,8 +42,13 @@ def pre_pipeline_preparation(*, data_frame: pd.DataFrame) -> pd.DataFrame:
 
     data_frame["type"] = data_frame["type"].apply(type_map)      
 
-    data_frame['isFraud']=data_frame['isFraud'].apply(f1)               
-
+    data_frame['isFraud']=data_frame['isFraud'].apply(f1) 
+                  
+    if isinstance(config.model_config, dict):
+        # If config.model_config is a dictionary, create a ModelConfig object
+        model_config = ModelConfig(**config.model_config)
+    else:
+        model_config = config.model_config
     # drop unnecessary variables
     data_frame.drop(labels=config.model_config.unused_fields, axis=1, inplace=True)
 
@@ -73,6 +82,14 @@ def save_pipeline(*, pipeline_to_persist: Pipeline) -> None:
     remove_old_pipelines(files_to_keep=[save_file_name])
     joblib.dump(pipeline_to_persist, save_path)
 
+def download_datafile(*, file_name: str, remote_url: str) -> None:
+    # Download the file from the remote URL
+    #urlretrieve(remote_url, f"{DATASET_DIR}/{file_name}")
+    
+    destination_path = DATASET_DIR / file_name
+    # Download the file using gdown
+    with open(destination_path, 'wb') as f:
+        gdown.download(remote_url, f, quiet=False)
 
 def load_pipeline(*, file_name: str) -> Pipeline:
     """Load a persisted pipeline."""

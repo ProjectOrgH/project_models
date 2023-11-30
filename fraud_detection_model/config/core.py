@@ -28,6 +28,7 @@ class AppConfig(BaseModel):
     training_data_file: str
     test_data_file: str
     pipeline_save_file: str
+    remote_data_file_url: str
 
 
 class ModelConfig(BaseModel):

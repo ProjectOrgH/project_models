@@ -13,7 +13,7 @@ import fraud_detection_model
 PACKAGE_ROOT = Path(fraud_detection_model.__file__).resolve().parent
 ROOT = PACKAGE_ROOT.parent
 CONFIG_FILE_PATH = PACKAGE_ROOT / "config.yml"
-print(CONFIG_FILE_PATH)
+#print(CONFIG_FILE_PATH)
 
 DATASET_DIR = PACKAGE_ROOT / "datasets"
 TRAINED_MODEL_DIR = PACKAGE_ROOT / "trained_models"
@@ -64,7 +64,7 @@ def fetch_config_from_yaml(cfg_path: Path = None) -> YAML:
         cfg_path = find_config_file()
 
     if cfg_path:
-        print(cfg_path)
+        #print("cfg_path:",cfg_path)
         with open(cfg_path, "r") as conf_file:
             parsed_config = load(conf_file.read())
             return parsed_config
@@ -76,7 +76,8 @@ def create_and_validate_config(parsed_config: YAML = None) -> Config:
     """Run validation on config values."""
     if parsed_config is None:
         parsed_config = fetch_config_from_yaml()
-
+     
+    #print("parsed_config.data", parsed_config.data)
     # specify the data attribute from the strictyaml YAML type.
     _config = Config(
         app_config=AppConfig(**parsed_config.data),
@@ -84,6 +85,5 @@ def create_and_validate_config(parsed_config: YAML = None) -> Config:
     )
 
     return _config
-
 
 config = create_and_validate_config()

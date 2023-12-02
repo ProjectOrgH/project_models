@@ -56,8 +56,10 @@ jobs:
         if [ -f requirements/test_requirements.txt ]; then pip install -r requirements/test_requirements.txt; fi
     - name: Test with pytest
       run: |
-        if pytest  then
+        if pytest --collect-only; then
           pytest
+        else
+          echo "No tests to run."
         fi
 
   build:

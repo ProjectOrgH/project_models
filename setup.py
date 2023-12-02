@@ -26,11 +26,12 @@ ROOT_DIR = Path(__file__).resolve().parent
 print(ROOT_DIR)
 REQUIREMENTS_DIR = ROOT_DIR / 'requirements'
 PACKAGE_DIR = ROOT_DIR / 'fraud_detection_model'
+#print("Ajay_pkg:",PACKAGE_DIR)
 with open(PACKAGE_DIR / "VERSION") as f:
     _version = f.read().strip()
     about["__version__"] = _version
 
-
+#print("__version:", about["__version__"])
 # What packages are required for this module to be executed?
 def list_reqs(fname="requirements.txt"):
     with open(REQUIREMENTS_DIR / fname) as fd:

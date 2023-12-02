@@ -1,7 +1,8 @@
 [build-system]
 requires = [
     "setuptools>=42",
-    "wheel"
+    "wheel",
+    "pyproject"
 ]
 build-backend = "setuptools.build_meta"
 
@@ -46,3 +47,6 @@ profile = "black"
 line_length = 100
 lines_between_sections = 1
 skip = "migrations"
+
+[tool.setuptools]
+include = ["pyproject.toml"]

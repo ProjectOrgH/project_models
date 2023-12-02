@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/Users/hs/AIML/Capstone_Project/fraud_detection_model')
+sys.path.append('/Users/ajaysingh/aimlops/Project/capstone_project/project_models')
 
 import typing as t
 from pathlib import Path
@@ -16,10 +16,10 @@ import os
 from urllib.request import urlretrieve
 import gdown
 
-
+#print("Config:",config)
 ##  Pre-Pipeline Preparation
 
-def type_map(transaction:str) -> str:  
+def type_map(transaction:str) -> int:  
     if transaction == 'CASH_OUT' :
         return 1
     elif transaction == 'PAYMENT' :
@@ -44,9 +44,9 @@ def pre_pipeline_preparation(*, data_frame: pd.DataFrame) -> pd.DataFrame:
 
     data_frame['isFraud']=data_frame['isFraud'].apply(f1) 
                   
-        
+    #print("config.model_config:", config.model_config1)
     # drop unnecessary variables
-    data_frame.drop(labels=config.model_config.unused_fields, axis=1, inplace=True)
+    data_frame.drop(labels=config.model_config1.unused_fields, axis=1, inplace=True)
 
     return data_frame
 

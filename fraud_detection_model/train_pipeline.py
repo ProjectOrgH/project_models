@@ -38,10 +38,10 @@ def run_training() -> None:
     #print("Print features",config.model_config.features)
     # divide train and test
     x_train, x_test, y_train, y_test = train_test_split(
-        data[config.model_config.features],  # predictors
-        data[config.model_config.target],
-        test_size=config.model_config.test_size,
-        random_state=config.model_config.random_state,
+        data[config.model_config1.features],  # predictors
+        data[config.model_config1.target],
+        test_size=config.model_config1.test_size,
+        random_state=config.model_config1.random_state,
     )
 
     # Pipeline fitting

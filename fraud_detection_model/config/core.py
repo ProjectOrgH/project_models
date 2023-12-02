@@ -38,16 +38,16 @@ class ModelConfig(BaseModel):
     """
 
     target: str
+    features: List[str]
     unused_fields: List[str]
     test_size: float
     random_state: int
-    features: List[str]
+    
 
 class Config(BaseModel):
     """Master config object."""
-
     app_config: AppConfig
-    model_config: ModelConfig
+    model_config1: ModelConfig
 
 
 def find_config_file() -> Path:
@@ -76,14 +76,14 @@ def create_and_validate_config(parsed_config: YAML = None) -> Config:
     """Run validation on config values."""
     if parsed_config is None:
         parsed_config = fetch_config_from_yaml()
-     
-    #print("parsed_config.data", parsed_config.data)
-    # specify the data attribute from the strictyaml YAML type.
+    
+    
     _config = Config(
-        app_config=AppConfig(**parsed_config.data),
-        model_config=ModelConfig(**parsed_config.data),
+        app_config = AppConfig(**parsed_config.data),
+        model_config1 = ModelConfig(**parsed_config.data),
     )
-
+    #print("ajay:",_config)
     return _config
+    
 
 config = create_and_validate_config()

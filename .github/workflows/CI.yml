@@ -2,7 +2,7 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - ajay_CICD
+      - main
   workflow_dispatch:
 
 jobs:

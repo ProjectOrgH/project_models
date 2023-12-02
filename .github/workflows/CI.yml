@@ -80,7 +80,10 @@ jobs:
         name: my-trained-pipeline
     - run: mv *.pkl fraud_detection_model/trained_models/
     - name: Install dependencies
-      run: pip install --upgrade build
+      run: |
+        pip install --upgrade build
+        python -m pip install --upgrade pip
+        python -m pip install build setuptools wheel
     - name: Build package
       run: python -m build
     - uses: actions/upload-artifact@v2

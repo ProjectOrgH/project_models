@@ -92,7 +92,7 @@ jobs:
         path: dist/*.whl
 
   push-image:
-    if: false  # This job will always be skipped, we will revisit it later
+    #if: false  # This job will always be skipped, we will revisit it later
     needs: [train, test, build]
     runs-on: ubuntu-latest
     steps:

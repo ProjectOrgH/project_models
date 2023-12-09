@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/Users/hs/AIML/Capstone_Project/fraud_detection_model')
+sys.path.append('/Users/ajaysingh/aimlops/Project/capstone_project/project_models')
 
 import typing as t
 from pathlib import Path
@@ -12,10 +12,14 @@ from sklearn.pipeline import Pipeline
 from fraud_detection_model import __version__ as _version
 from fraud_detection_model.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config
 
+import os
+from urllib.request import urlretrieve
+import gdown
 
+#print("Config:",config)
 ##  Pre-Pipeline Preparation
 
-def type_map(transaction:str) -> str:  
+def type_map(transaction:str) -> int:  
     if transaction == 'CASH_OUT' :
         return 1
     elif transaction == 'PAYMENT' :
@@ -38,10 +42,11 @@ def pre_pipeline_preparation(*, data_frame: pd.DataFrame) -> pd.DataFrame:
 
     data_frame["type"] = data_frame["type"].apply(type_map)      
 
-    data_frame['isFraud']=data_frame['isFraud'].apply(f1)               
-
+    data_frame['isFraud']=data_frame['isFraud'].apply(f1) 
+                  
+    #print("config.model_config:", config.model_config1)
     # drop unnecessary variables
-    data_frame.drop(labels=config.model_config.unused_fields, axis=1, inplace=True)
+    data_frame.drop(labels=config.model_config1.unused_fields, axis=1, inplace=True)
 
     return data_frame
 
@@ -51,7 +56,7 @@ def _load_raw_dataset(*, file_name: str) -> pd.DataFrame:
     return dataframe
 
 def load_dataset(*, file_name: str) -> pd.DataFrame:
-    print(Path(f"{DATASET_DIR}/{file_name}"))
+    #print(Path(f"{DATASET_DIR}/{file_name}"))
     dataframe = pd.read_csv(Path(f"{DATASET_DIR}/{file_name}"))
     transformed = pre_pipeline_preparation(data_frame=dataframe)
 
@@ -73,6 +78,18 @@ def save_pipeline(*, pipeline_to_persist: Pipeline) -> None:
     remove_old_pipelines(files_to_keep=[save_file_name])
     joblib.dump(pipeline_to_persist, save_path)
 
+def download_datafile(*, file_name: str, remote_url: str) -> None:
+    # Download the file from the remote URL
+    #urlretrieve(remote_url, f"{DATASET_DIR}/{file_name}")
+    
+    destination_path = DATASET_DIR / file_name
+    
+    # Ensure the parent directory exists
+    destination_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    # Download the file using gdown
+    with open(destination_path, 'wb') as f:
+        gdown.download(remote_url, f, quiet=False)
 
 def load_pipeline(*, file_name: str) -> Pipeline:
     """Load a persisted pipeline."""

@@ -1,21 +1,23 @@
 package_name: fraud_detection_model
 training_data_file: data.csv
 test_data_file: test.csv
+remote_data_file_url: https://drive.google.com/uc?id=1mntnVz7S5WxFnPCyNp0Gkc3LedcrGyS5
 target: isFraud
-pipeline_name: fraud_detection_model
-pipeline_save_file: fraud_detection_model_output_v
-features:
-  - type
-  - amount
-  - oldbalanceOrg
-  - newbalanceOrig
-unused_fields:
+
+unused_fields:  # Features to drop before pipeline
   - step
   - newbalanceDest
   - oldbalanceDest
   - nameOrig
   - nameDest
   - isFlaggedFraud
+
 test_size: 0.2
 random_state: 42
-
+features:
+  - type
+  - amount
+  - oldbalanceOrg
+  - newbalanceOrig
+pipeline_name: fraud_detection_model
+pipeline_save_file: fraud_detection_model_output_v  

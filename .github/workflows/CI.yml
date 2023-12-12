@@ -10,7 +10,7 @@ env:
   ECR_REPOSITORY: fraud_detection_fastapi           # set this to your Amazon ECR repository name
   ECS_SERVICE: pgrp3_fraud_detection                 # set this to your Amazon ECS service name
   ECS_CLUSTER: grp3_cluster                 # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: grp3-fargate:1 # set this to the path to your Amazon ECS task definition
+  ECS_TASK_DEFINITION: arn:aws:ecs:ap-south-1:130621888287:task-definition/grp3-fargate:1 # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: fraud_detection_app           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition

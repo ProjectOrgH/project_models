@@ -123,7 +123,7 @@ jobs:
     #- name: Logout to Docker hub
     #  run: docker logout
     
-  - name: Login to Docker hub and push the image to ECR
+    - name: Login to Docker hub and push the image to ECR
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS_TOKEN }}

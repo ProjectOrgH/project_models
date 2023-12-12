@@ -104,21 +104,45 @@ jobs:
         name: my-build-package
     - run: mv *.whl fraud_detection_model_api/
 
-    - name: Login to Docker hub
+#    - name: Login to Docker hub
+#      env:
+#        DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+#        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS_TOKEN }}
+#      run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
+
+#    - name: Build the Docker image for Fastapi app
+#      env:
+#        DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+#      run: docker build . -f Dockerfile -t $DOCKER_USER/sample-fraud_detection_model:latest
+
+#    - name: Push the Docker Image
+#      env:
+#        DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+#      run: docker push $DOCKER_USER/sample-fraud_detection_model
+
+#    - name: Logout to Docker hub
+#      run: docker logout
+    
+  - name: Login to Docker hub and push the image to ECR
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS_TOKEN }}
-      run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
+      run: echo $DOCKER_PASS_TOKEN | docker login --username $DOCKER_USER_NAME --password-stdin 130621888287.dkr.ecr.ap-south-1.amazonaws.com
 
     - name: Build the Docker image for Fastapi app
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
-      run: docker build . -f Dockerfile -t $DOCKER_USER/sample-fraud_detection_model:latest
+      run: docker build -t fraud_detection_fastapi .
+
+    - name: Tag the Docker image
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+      run: docker tag fraud_detection_fastapi:latest 130621888287.dkr.ecr.ap-south-1.amazonaws.com/fraud_detection_fastapi:latest
 
     - name: Push the Docker Image
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
-      run: docker push $DOCKER_USER/sample-fraud_detection_model
+      run: docker push 130621888287.dkr.ecr.ap-south-1.amazonaws.com/fraud_detection_fastapi:latest
 
     - name: Logout to Docker hub
       run: docker logout

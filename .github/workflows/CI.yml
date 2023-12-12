@@ -138,7 +138,6 @@ jobs:
           aws ecr get-login-password --profile ecr-user | docker login --username AWS --password-stdin $AWS_ECR
 
 
-
     - name: Build the Docker image for Fastapi app
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}

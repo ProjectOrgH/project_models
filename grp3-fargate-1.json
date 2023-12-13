@@ -1,0 +1,28 @@
+{
+    "family": "grp3-fargate",
+    "containerDefinitions": [
+        {
+            "name": "fraud_detection_app",
+            "image": "130621888287.dkr.ecr.ap-south-1.amazonaws.com/fraud_detection_fastapi:latest",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "containerPort": 8001,
+                    "hostPort": 8001,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": []
+        }
+    ],
+    "executionRoleArn": "arn:aws:iam::130621888287:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "3072"
+}

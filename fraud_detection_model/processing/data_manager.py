@@ -35,7 +35,7 @@ def type_map(transaction:str) -> int:
     
 # 2. processing cabin
 
-f1=lambda x: False if type(x) == float else True  
+f1=lambda x: False if x == 0 else True  
   
 
 def pre_pipeline_preparation(*, data_frame: pd.DataFrame) -> pd.DataFrame:

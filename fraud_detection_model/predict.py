@@ -68,15 +68,15 @@ if __name__ == "__main__":
 
     data_in = {
         "step": [1],
-        "type": ["PAYMENT"],
-        "amount": [9839.64],
-        "nameOrig": ["C1231006815"],
-        "oldbalanceOrg": [9839.64],
-        "newbalanceOrig": [170136.0],
-        "nameDest": ["M1979787155"],
+        "type": ["TRANSFER"],
+        "amount": [181.0],
+        "nameOrig": ["C1305486145"],
+        "oldbalanceOrg": [181.0],
+        "newbalanceOrig": [0.0],
+        "nameDest": ["C553264065"],
         "oldbalanceDest": [0.0],
         "newbalanceDest": [0.0],
-        "isFraud": [0],
+        "isFraud": [1],
         "isFlaggedFraud": [0],
     }
 

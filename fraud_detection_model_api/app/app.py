@@ -92,13 +92,13 @@ in_type = gradio.Radio(["PAYMENT", "CASH_OUT", "CASH_IN", "TRANSFER", "DEBIT"], 
 #in_oldbalanceOrig = gradio.Textbox(type="float", default="0.0", label="What was the old balance at origin")
 #in_newbalanceOrig = gradio.Textbox(type="float", default="0.0", label="What is the new balance at origin")
 
-in_amount = gradio.Slider(minimum=0, maximum=100000, value=9839.64, step=1, label="Enter transaction amount", show_label=True)
-in_oldbalanceOrig = gradio.Slider(minimum=0, maximum=100000, value=9839.64, step=1, label="What was the old balance at origin", show_label=True)
-in_newbalanceOrig = gradio.Slider(minimum=0, maximum=100000, value=170136.0, step=1, label="What is the New balance at origin", show_label=True)
+in_amount = gradio.Slider(minimum=0, maximum=10000000, value=9839.64, step=1, label="Enter transaction amount", show_label=True)
+in_oldbalanceOrig = gradio.Slider(minimum=0, maximum=10000000, value=9839.64, step=1, label="What was the old balance at origin", show_label=True)
+in_newbalanceOrig = gradio.Slider(minimum=0, maximum=10000000, value=170136.0, step=1, label="What is the New balance at origin", show_label=True)
 
 
 # Output response
-out_response = gradio.components.Textbox(type="text", label='IsFraud')
+out_response = gradio.components.Textbox(type="text", label='Model response for the transaction')
 
 # Gradio interface to generate UI link
 title = "Fraud Detection"

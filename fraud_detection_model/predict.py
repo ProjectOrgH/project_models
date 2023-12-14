@@ -69,9 +69,9 @@ if __name__ == "__main__":
     data_in = {
         "step": [1],
         "type": ["TRANSFER"],
-        "amount": [181.0],
+        "amount": [500.0],
         "nameOrig": ["C1305486145"],
-        "oldbalanceOrg": [181.0],
+        "oldbalanceOrg": [197.0],
         "newbalanceOrig": [0.0],
         "nameDest": ["C553264065"],
         "oldbalanceDest": [0.0],

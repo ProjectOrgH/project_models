@@ -2,13 +2,14 @@ name: CI CD Pipeline
 on:
   push:
     branches:
-      - ajayy_gradio
+      - main
   workflow_dispatch:
+
 
 env:
   AWS_REGION: ap-south-1                   # set this to your preferred AWS region, e.g. us-west-1
   ECR_REPOSITORY: fraud_detection_fastapi           # set this to your Amazon ECR repository name
-  ECS_SERVICE: grp3_fraud_detection                 # set this to your Amazon ECS service name
+  ECS_SERVICE: grp3_fraud_detection_service                 # set this to your Amazon ECS service name
   ECS_CLUSTER: grp3_cluster                 # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: grp3-fargate-1.json # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
